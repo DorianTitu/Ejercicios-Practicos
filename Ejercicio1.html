@@ -8,6 +8,92 @@
 <body>
 </body>
 <script>
-    
+    /*Variables primitivas con let, Variables no primitivas van con const*/
+    let contador = 0;
+    const listaTareas = [];
+    const tarea = {
+        id: Number,
+        nombre: String,
+        prioridad: String("baja", "media", "alta"),
+        completada: Boolean
+    };
+    const agregarTarea = (nombre, prioridad) => {
+        const nuevaTarea = {
+            id: contador++,
+            nombre: nombre,
+            prioridad: prioridad,
+            completada: false
+        };
+        listaTareas.push(nuevaTarea);
+    };
+    const listarTareas = () => {
+        for (const tarea in listaTareas) {
+            console.log(tarea);
+        }
+    };
+    const marcarTareaCompleta = (id) => {
+        for (const tarea in listaTareas) {
+            if (tarea.id === id) {
+                tarea.completada = true;
+            }
+        }
+    };
+    const filtrarTareaPorPrioridad = (prioridad) => {
+        const arregloFiltrado = [];
+        for (const tarea in listaTareas) {
+            if (tarea.prioridad === prioridad) {
+                arregloFiltrado.push(tarea);
+            }
+        }
+        return arregloFiltrado;
+    };
+    const eliminarTareaPorId = (id) => {
+        for (const tarea in listaTareas) {
+            if (tarea.id === id) {
+                listaTareas.splice(tarea, 1);
+                break;
+            }
+        }
+    };
+
+    let menu = `
+        Bienvenido este es un menu para agendar tareas\n
+        \t1 Ingresar una tarea\n
+        \t2 Listar tareas\n
+        \t3 Marcar tarea como completada\n
+        \t4 Filtrar tareas por prioridad\n
+        \t5 Eliminar tarea por id\n
+        \t6 Salir\n
+        `;
+    let operacion = 0;
+    do {
+       operacion = Math.floor(prompt(menu));
+       switch (operacion){
+        case 1:
+                console.log("Ingreso de tareas")
+                let nombre = prompt("Ingrese el nombre de la tarea");
+                let prioridad = prompt("Ingrese la prioridad de la tarea");
+                agregarTarea(nombre, prioridad);
+                listarTareas();
+                break;
+           case 2:
+               alert("Listar tareas");
+               break;
+           case 3:
+               alert("Marcar tarea como completada");
+               break;
+           case 4:
+               alert("Filtrar tareas por prioridad");
+               break;
+           case 5:
+               alert("Eliminar tarea por id");
+               break;
+           case 6:
+               alert("Salir");
+               break;
+           default:
+               alert("Opción no válida");
+       }
+    } while (operacion !== 6);
 </script>
 </html>
